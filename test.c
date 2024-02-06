@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:06:36 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/05 14:26:56 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:07:22 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,55 @@
 // 	return (0);
 // }
 
-#include <stdio.h>
-#include <unistd.h>
+// int	main(void)
+// {
+// 	int	pipex[2];
+// 	int	process_id;
+// 	char	str[6];
 
-int	main(void)
+// 	str[5] = 0;
+// 	pipe(pipex);
+// 	process_id = fork();
+// 	if (process_id == 0)
+// 	{
+// 		close(pipex[0]);
+// 		write(pipex[1], "salut", 5);
+// 		close(pipex[1]);
+// 	}
+// 	else
+// 	{
+// 		read(pipex[0], str, 5);
+// 		close(pipex[0]);
+// 		close(pipex[1]);
+// 	}
+// }
+
+// int	main(void)
+// {
+// 	int status;
+// 	int	id;
+// 	int	i;
+
+// 	i = 0;
+// 	status = 0;
+// 	id = fork();
+// 	printf("id = %d\n", id);
+// 	if (id != 0)
+// 		wait(&status);
+// 	perror("");
+// 	printf("status = %d\n", status);
+// 	while (i < 10)
+// 		printf("%d in process %d\n", i++, id);	
+// }
+
+int main(int argc, char **av, char **env)
 {
-	int	pipex[2];
-	int	process_id;
-	char	str[10];
+	(void) argc;
+	int	fd;
 
-	str[5] = 0;
-	pipe(pipex);
-	process_id = fork();
-	if (process_id == 0)
-	{
-		close(pipex[0]);
-		write(pipex[1], "salut", 5);
-		close(pipex[1]);
-	}
-	else
-	{
-		read(pipex[0], str, 5);
-		close(pipex[0]);
-		close(pipex[1]);
-	}
-	printf("Process %d : string %s\n", process_id, str);
+	fd = open("infile", O_WRONLY);
+	av++;
+	fd = dup2(fd, STDOUT_FILENO);
+	execve("/bin/ls", av, env);
 }
+

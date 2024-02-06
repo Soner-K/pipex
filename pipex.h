@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:06:51 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/01/30 18:37:20 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:48:24 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdio.h>
-
+#include <sys/types.h>
+#include <sys/wait.h>
 #endif
