@@ -6,14 +6,19 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:12:23 by sokaraku          #+#    #+#             */
-/*   Updated: 2023/12/21 10:38:50 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:38:38 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-/*a putnbr that receives a long (so that it can deal with both INT_MIN and UNSIGNED_INT_MAX)
-with also a pointer to size that is increased by each call to the ft_putnbr_long function*/
+/**
+ * @brief Writes a number in STDOUT.
+ * @param nb The number to write.
+ * @param size A pointer to a value containing the number of octets written
+ * in the STDOUT.
+ * @returns void.
+ */
 void	ft_putnbr_long(long nb, int	*size)
 {
 	if (nb < 0)
@@ -32,9 +37,13 @@ void	ft_putnbr_long(long nb, int	*size)
 	ft_putchar_fd((nb % 10) + '0', 1);
 }
 
-
-/*Classic ft_putstr but whit a size pointer that acts as a counter of the characters written,
-just like in ft_putnbr_long>*/
+/**
+ * @brief Writes a string in the STDOUT.
+ * @param str The string to write.
+ * @param size A pointer to a value containing the number of octets written
+ * in the STDOUT.
+ * @returns void.
+ */
 void	ft_putstr(char *str, int *size)
 {
 	if (!str)
@@ -48,10 +57,16 @@ void	ft_putstr(char *str, int *size)
 		ft_putchar_fd(*str++, 1);
 }
 
-/*basically a putnbr but in hexadecimal format
-the format is modified in function of the character c sent (x or X)
-p is a binary used only in the first call of the function. If it is 1
-then a 0x needs to be written for writing an adress of a void pointer (in hex value)*/
+/**
+ * @brief Writes a number in hexadecimal format in the STDOUT.
+ * @param nb The number to write.
+ * @param c A character containing X or x, so that the format is adjusted
+ * (capital letters or not).
+ * @param p A binary equal to 1 if an adress needs to be written, 0 otherwise.
+ * @param size A pointer to a value containing the number of octets written
+ * in the STDOUT.
+ * @returns void.
+ */
 void	to_hex(unsigned long nb, char c, char p, int *size)
 {
 	char	*base;

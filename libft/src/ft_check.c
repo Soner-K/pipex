@@ -6,13 +6,13 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:14:08 by sokaraku          #+#    #+#             */
-/*   Updated: 2023/12/21 10:19:48 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:51:22 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int ft_check(char *str, int c)
+int	ft_find(char *str, int c)
 {
 	size_t	i;
 

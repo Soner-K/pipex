@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/05 17:59:22 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/05 11:48:05 by sokaraku         ###   ########.fr       */
+/*   Created: 2024/02/07 13:21:56 by sokaraku          #+#    #+#             */
+/*   Updated: 2024/02/07 15:15:12 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "pipex.h"
 
-void	ft_putnbr_fd(int n, int fd)
-{
-	long	nb;
+// int	main(int ac, char **av, char **env)
+// {
+// 	(void)ac;
+// 	(void)av;
+//
+// 	while (*env)
+// 	{
+// 		if (!ft_strcmp(*env, "PATH"))
+// 		{
+// 			printf("%d\n", 1);
+// 			break ;
+// 		}
+// 		env++;
+// 	}
+// }
 
-	nb = n;
-	if (nb < 0)
-	{
-		nb *= -1;
-		ft_putchar_fd('-', fd);
-	}
-	if (nb / 10 > 0)
-		ft_putnbr_fd(nb / 10, fd);
-	ft_putchar_fd(nb % 10 + '0', fd);
-}

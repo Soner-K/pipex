@@ -1,15 +1,12 @@
-total 36
-drwxr-xr-x  6 sokaraku 2023_paris   178 Feb  6 13:07 .
-drwxr-xr-x 10 sokaraku 2023_paris   145 Feb  1 14:02 ..
--rwxr-xr-x  1 sokaraku 2023_paris 16024 Feb  6 13:07 a.out
-drwxr-xr-x  8 sokaraku 2023_paris   185 Feb  5 14:40 .git
-drwxr-xr-x  2 sokaraku 2023_paris     6 Feb  1 14:01 includes
--rw-r--r--  1 sokaraku 2023_paris   664 Feb  6 13:07 infile
-drwxr-xr-x  6 sokaraku 2023_paris    87 Feb  1 14:04 libft
--rw-r--r--  1 sokaraku 2023_paris     0 Feb  1 14:01 Makefile
--rw-r--r--  1 sokaraku 2023_paris     3 Feb  6 12:41 outfile
--rw-r--r--  1 sokaraku 2023_paris  1094 Feb  6 10:48 pipex.h
--rw-r--r--  1 sokaraku 2023_paris     7 Feb  1 14:01 README.md
-drwxr-xr-x  2 sokaraku 2023_paris     6 Feb  1 14:01 src
--rw-r--r--  1 sokaraku 2023_paris  2230 Feb  6 13:07 test.c
--rw-r--r--  1 sokaraku 2023_paris     0 Feb  1 14:01 text.txt
+total 32
+-rwxr-xr-x 1 sokaraku 2023_paris 16176 Feb  7 13:18 a.out
+drwxr-xr-x 2 sokaraku 2023_paris     6 Feb  1 14:01 includes
+-rwxrwxrwx 1 sokaraku 2023_paris     0 Feb  7 13:17 infile
+drwxr-xr-x 6 sokaraku 2023_paris    87 Feb  1 14:04 libft
+-rw-r--r-- 1 sokaraku 2023_paris     0 Feb  1 14:01 Makefile
+-rw-r--r-- 1 sokaraku 2023_paris   664 Feb  7 13:09 outfile
+-rw-r--r-- 1 sokaraku 2023_paris  1094 Feb  6 10:48 pipex.h
+-rw-r--r-- 1 sokaraku 2023_paris     7 Feb  1 14:01 README.md
+drwxr-xr-x 2 sokaraku 2023_paris     6 Feb  1 14:01 src
+-rw-r--r-- 1 sokaraku 2023_paris  2963 Feb  7 13:18 test.c
+-rw-r--r-- 1 sokaraku 2023_paris     0 Feb  1 14:01 text.txt

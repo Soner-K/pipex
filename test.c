@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:06:36 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/06 13:07:22 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:09:01 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 // 	int	pipex[2];
 // 	int	process_id;
 // 	char	str[6];
-
+//
 // 	str[5] = 0;
 // 	pipe(pipex);
 // 	process_id = fork();
@@ -59,13 +59,13 @@
 // 		close(pipex[1]);
 // 	}
 // }
-
+//
 // int	main(void)
 // {
 // 	int status;
 // 	int	id;
 // 	int	i;
-
+//
 // 	i = 0;
 // 	status = 0;
 // 	id = fork();
@@ -75,17 +75,49 @@
 // 	perror("");
 // 	printf("status = %d\n", status);
 // 	while (i < 10)
-// 		printf("%d in process %d\n", i++, id);	
+// 		printf("%d in process %d\n", i++, id);
 // }
 
-int main(int argc, char **av, char **env)
-{
-	(void) argc;
-	int	fd;
+// int	main(int argc, char **av, char **env)
+// {
+// 	int	fd;
+// 	int	process;
 
-	fd = open("infile", O_WRONLY);
-	av++;
-	fd = dup2(fd, STDOUT_FILENO);
-	execve("/bin/ls", av, env);
-}
+// 	(void)argc;
+// 	av++;
+// 	process = fork();
+// 	if (process != 0)
+// 	{
+// 		fd = open("outfile", O_WRONLY);
+// 		wait(&process);
+// 		printf("process = %d\n", process);
+// 		fd = dup2(fd, STDOUT_FILENO);
+// 		execve("/bin/ls", av, env);
+// 	}
+// 	else
+// 	{
+// 		fd = open("infile", O_WRONLY);
+// 		printf("fd process chuld %d\n", fd);
+// 		fd = dup2(fd, STDOUT_FILENO);
+// 		write(fd, "test depuis fd\n", 15);
+// 		printf("fd process chuld %d\n", fd);
+// 		write(STDOUT_FILENO, "test depuis stdout\n", 19);
+// 		execve("/bin/ls", av, env);
+// 	}
+// }
 
+// int	main(int ac, char **argv, char **env)
+// {
+// 	(void)ac;
+// 	int fd;
+
+// 	fd = 0;
+// 	if (!access(argv[1], W_OK))
+// 		fd = open(argv[1], O_WRONLY);
+// 	printf("fd %d\n", fd);
+// 	if (fd == -1)
+// 		perror("Error");
+// 	 fd = dup2(fd, STDOUT_FILENO);
+// 	if (execve("/bin/lseee", argv + 2, env) < 0)
+// 		perror("");
+// }
