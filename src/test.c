@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:06:36 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/08 15:49:28 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:17:41 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,18 +137,19 @@ int	main(int ac, char **av, char **env)
 	if (pid != 0)
 	{
 		wait(&status);
-		cmd = cmd_array(av + 1);
+		cmd = cmd_array(av);
 		if (!cmd)
 			return (1);
 		path = find_path(env, cmd[0], 0);
 		if (!path)
 			return (1);
-		printf("%s\n", path);
+		printf("parent %s\n", path);
 		fd = open("outfile", O_CREAT | O_EXCL | O_WRONLY);
 		close(pipe_fd[1]);
 		dup2(fd, STDOUT_FILENO);
 		dup2(pipe_fd[0], STDIN_FILENO);
-		execve(path, av + 1, env);
+		cmd[2] = NULL;
+		execve(path, cmd, env);
 	}
 	else
 	{
@@ -158,11 +159,12 @@ int	main(int ac, char **av, char **env)
 		path = find_path(env, cmd[0], 0);
 		if (!path)
 			return (1);
-		printf("%s\n", path);
+		printf("child %s\n", path);
 		fd = open("infile", O_CREAT | O_EXCL | O_WRONLY);
 		close(pipe_fd[0]);
 		dup2(fd, STDOUT_FILENO);
 		dup2(pipe_fd[1], STDOUT_FILENO);
-		execve(path, av + 1, env);
+		cmd += 2;
+		execve(path, cmd, env);
 	}
 }
