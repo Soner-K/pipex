@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   free_arrs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 13:21:56 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/07 15:15:12 by sokaraku         ###   ########.fr       */
+/*   Created: 2024/02/08 11:19:01 by sokaraku          #+#    #+#             */
+/*   Updated: 2024/02/08 12:19:13 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/libft.h"
 
-// int	main(int ac, char **av, char **env)
-// {
-// 	(void)ac;
-// 	(void)av;
-//
-// 	while (*env)
-// 	{
-// 		if (!ft_strcmp(*env, "PATH"))
-// 		{
-// 			printf("%d\n", 1);
-// 			break ;
-// 		}
-// 		env++;
-// 	}
-// }
+void	free_arrs(void **arrs)
+{
+	int	i;
 
+	i = 0;
+	while (arrs[i])
+	{
+		free(arrs[i]);
+		i++;
+	}
+	free(arrs[i]);
+	free(arrs);
+}

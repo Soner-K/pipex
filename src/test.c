@@ -6,11 +6,11 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:06:36 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/07 16:09:01 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:49:28 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 // void	test(int *id)
 // {
@@ -117,7 +117,52 @@
 // 	printf("fd %d\n", fd);
 // 	if (fd == -1)
 // 		perror("Error");
-// 	 fd = dup2(fd, STDOUT_FILENO);
+// 		fd = dup2(fd, STDOUT_FILENO);
 // 	if (execve("/bin/lseee", argv + 2, env) < 0)
 // 		perror("");
 // }
+
+int	main(int ac, char **av, char **env)
+{
+	(void)ac;
+	char **cmd;
+	char *path;
+	int pid;
+	int fd;
+	int status;
+	int pipe_fd[2];
+
+	pipe(pipe_fd);
+	pid = fork();
+	if (pid != 0)
+	{
+		wait(&status);
+		cmd = cmd_array(av + 1);
+		if (!cmd)
+			return (1);
+		path = find_path(env, cmd[0], 0);
+		if (!path)
+			return (1);
+		printf("%s\n", path);
+		fd = open("outfile", O_CREAT | O_EXCL | O_WRONLY);
+		close(pipe_fd[1]);
+		dup2(fd, STDOUT_FILENO);
+		dup2(pipe_fd[0], STDIN_FILENO);
+		execve(path, av + 1, env);
+	}
+	else
+	{
+		cmd = cmd_array(av + 1);
+		if (!cmd)
+			return (1);
+		path = find_path(env, cmd[0], 0);
+		if (!path)
+			return (1);
+		printf("%s\n", path);
+		fd = open("infile", O_CREAT | O_EXCL | O_WRONLY);
+		close(pipe_fd[0]);
+		dup2(fd, STDOUT_FILENO);
+		dup2(pipe_fd[1], STDOUT_FILENO);
+		execve(path, av + 1, env);
+	}
+}

@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 13:30:42 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/07 16:16:24 by sokaraku         ###   ########.fr       */
+/*   Created: 2024/01/30 17:06:51 by sokaraku          #+#    #+#             */
+/*   Updated: 2024/02/08 15:18:07 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#ifndef PIPEX_H
+# define PIPEX_H
 
-int	ft_strcmp(const char *s1, const char *s2)
+# include "../libft/includes/libft.h"
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <unistd.h>
+
+typedef struct s_cmd
 {
-	size_t			i;
-	unsigned char	*s1_cp;
-	unsigned char	*s2_cp;
+	char	*cmd1;
+	char	*cmd2;
+}			t_cmd;
 
-	i = 0;
-	s1_cp = (unsigned char *)s1;
-	s2_cp = (unsigned char *)s2;
-	while ((s1[i] && s2[i]))
-	{
-		if (s1_cp[i] != s2_cp[i])
-			return (s1_cp[i] - s2_cp[i]);
-		i++;
-	}
-	return (0);
-}
+void		ft_error(char *str);
+char		*find_path(char **env, char *cmd, int i);
+char		**cmd_array(char **av);
+
+#endif
