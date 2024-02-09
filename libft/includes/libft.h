@@ -6,13 +6,14 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:01:44 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/08 12:19:04 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:27:28 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <stdio.h>
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>

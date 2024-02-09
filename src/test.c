@@ -6,77 +6,11 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:06:36 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/08 17:17:41 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:42:03 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
-// void	test(int *id)
-// {
-// 	*id = fork();
-// 	printf("id in test is = %d\n", *id);
-// }
-
-// int	main(int ac, char **av, char **env)
-// {
-// 	int	id;
-// 	char *args[] = {"cat", "test.c", NULL};
-// 	(void)ac;
-// 	test(&id);
-// 	if (id == 0)
-// 		printf("tg dans le process %d\n", id);
-// 	else
-// 		printf("tg dans le process %d\n", id);
-// 	av++;
-// 	printf("%s\n", *(env + 2));
-// 	if (id == 0)
-// 		execve("/bin/ls", av, NULL);
-// 	else
-// 		execve("/bin/cat", args, NULL);
-// 	return (0);
-// }
-
-// int	main(void)
-// {
-// 	int	pipex[2];
-// 	int	process_id;
-// 	char	str[6];
-//
-// 	str[5] = 0;
-// 	pipe(pipex);
-// 	process_id = fork();
-// 	if (process_id == 0)
-// 	{
-// 		close(pipex[0]);
-// 		write(pipex[1], "salut", 5);
-// 		close(pipex[1]);
-// 	}
-// 	else
-// 	{
-// 		read(pipex[0], str, 5);
-// 		close(pipex[0]);
-// 		close(pipex[1]);
-// 	}
-// }
-//
-// int	main(void)
-// {
-// 	int status;
-// 	int	id;
-// 	int	i;
-//
-// 	i = 0;
-// 	status = 0;
-// 	id = fork();
-// 	printf("id = %d\n", id);
-// 	if (id != 0)
-// 		wait(&status);
-// 	perror("");
-// 	printf("status = %d\n", status);
-// 	while (i < 10)
-// 		printf("%d in process %d\n", i++, id);
-// }
 
 // int	main(int argc, char **av, char **env)
 // {
@@ -122,49 +56,109 @@
 // 		perror("");
 // }
 
-int	main(int ac, char **av, char **env)
-{
-	(void)ac;
-	char **cmd;
-	char *path;
-	int pid;
-	int fd;
-	int status;
-	int pipe_fd[2];
+// int	main(int ac, char **av)
+// {
+// 	(void) ac;
+// 	(void) av;
+// 	int		fds[2];
+// 	int		id;
 
-	pipe(pipe_fd);
-	pid = fork();
-	if (pid != 0)
-	{
-		wait(&status);
-		cmd = cmd_array(av);
-		if (!cmd)
-			return (1);
-		path = find_path(env, cmd[0], 0);
-		if (!path)
-			return (1);
-		printf("parent %s\n", path);
-		fd = open("outfile", O_CREAT | O_EXCL | O_WRONLY);
-		close(pipe_fd[1]);
-		dup2(fd, STDOUT_FILENO);
-		dup2(pipe_fd[0], STDIN_FILENO);
-		cmd[2] = NULL;
-		execve(path, cmd, env);
-	}
-	else
-	{
-		cmd = cmd_array(av + 1);
-		if (!cmd)
-			return (1);
-		path = find_path(env, cmd[0], 0);
-		if (!path)
-			return (1);
-		printf("child %s\n", path);
-		fd = open("infile", O_CREAT | O_EXCL | O_WRONLY);
-		close(pipe_fd[0]);
-		dup2(fd, STDOUT_FILENO);
-		dup2(pipe_fd[1], STDOUT_FILENO);
-		cmd += 2;
-		execve(path, cmd, env);
-	}
-}
+// 	if (pipe(fds) == -1)
+// 		perror("");
+// 	id = fork();
+// 	if (id == 0)
+// 	{
+// 		close(fds[0]);
+// 		write(fds[1], "ouais", 5);
+// 		close(fds[1]);
+// 	}
+// 	else
+// 	{
+// 		// wait(NULL);
+// 		close(fds[1]);
+// 		char str[6];
+// 		str[5] = 0;
+// 		read(fds[0], str, 5);
+// 		printf("%s\n", str);
+// 		close(fds[0]);
+// 	}
+// 	return (0);
+// }
+
+// erreur sur fork?
+// int	main(void)
+// {
+// 	int fds[2];
+// 	int id;
+// 	int tab[] = {1, 1, 1, 1, 2, 22, 222, 2222, 22222, 222222, 2222222, 22222222,
+// 		2222222, 222222, 22222, 2222, 222, 22, 2};
+// 	int i;
+// 	int arr_size;
+// 	int even_number;
+
+// 	arr_size = sizeof(tab) / sizeof(int);
+// 	if (pipe(fds) == -1)
+// 		perror("");
+// 	i = 0;
+// 	id = fork();
+// 	if (id == 0)
+// 	{
+// 		close(fds[0]);
+// 		dup2(fds[1], STDOUT_FILENO);
+// 		while (arr_size--)
+// 		{
+// 			if (!(tab[i] % 2))
+// 				printf("%d ", tab[i]);
+// 			i++;
+// 		}
+// 		close(fds[1]);
+// 	}
+// 	else
+// 	{
+// 		wait(NULL);
+// 		close(fds[1]);
+// 		dup2(fds[0], STDIN_FILENO);
+// 		while (scanf("%d", &even_number) != EOF)
+// 			printf("%d\n", even_number);
+// 		close(fds[0]);
+// 	}
+// 	return (1);
+// }
+
+// int	main(int ac, char **av, char **env)
+// {
+// 	(void)ac;
+// 	int fds[2];
+// 	int id;
+// 	char **cmds;
+// 	char	*av2[1];
+// 	char *path;
+
+// 	cmds = cmd_array(av);
+// 	if (!cmds)
+// 		exit(1);
+// 	if (pipe(fds) == -1)
+// 		return (-1);
+// 	id = fork();
+// 	if (id == 0)
+// 	{
+// 		path = find_path(env, cmds[0], 0);
+// 		printf("child %s\npath %s\n", cmds[0], path);
+// 		close(fds[0]);
+// 		dup2(fds[1], STDOUT_FILENO);
+// 		av2[0] = cmds[0];
+// 		av++;
+// 		execve("/bin/ls", av, env);
+// 		return (1);
+// 	}
+// 	else
+// 	{
+// 		path = find_path(env, cmds[2], 0);
+// 		printf("parent %s\n", cmds[2]);
+// 		close(fds[1]);
+// 		dup2(fds[0], STDIN_FILENO);
+// 		av2[0] = cmds[2];
+// 		execve(path, av2, env);
+// 		return (1);
+// 	}
+// }

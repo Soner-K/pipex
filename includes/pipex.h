@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:06:51 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/08 15:18:07 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:37:44 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,26 @@
 
 # include "../libft/includes/libft.h"
 # include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
 # include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <unistd.h>
 
-typedef struct s_cmd
+typedef struct s_process
 {
-	char	*cmd1;
-	char	*cmd2;
-}			t_cmd;
+	int		fds[2];
+	int		fd_infile;
+	int		fd_outfile;
+	pid_t	id;
+}			t_process;
 
-void		ft_error(char *str);
+typedef struct s_path
+{
+	char	*path;
+	char	**cmds;
+}			t_path;
+
+void ft_error(char *str);
 char		*find_path(char **env, char *cmd, int i);
-char		**cmd_array(char **av);
+char		**cmd_array(char **av, int *next_cmd);
 
 #endif

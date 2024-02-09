@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:44:02 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/08 15:44:34 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:31:41 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_error(char *str)
 }
 
 //ajouter si path existe
+
 /**
  * @brief Given an environment variable, finds the directory in which
  * the executable of the command is.
@@ -80,7 +81,7 @@ char	*find_path(char **env, char *cmd, int i)
 		i++;
 	splited_path = ft_split(env[i], ':');
 	if (!splited_path)
-		ft_error("b");
+		ft_error("find_path !spl");
 	i = 0;
 	in_dir = 0;
 	tmp_path = NULL;
@@ -89,7 +90,7 @@ char	*find_path(char **env, char *cmd, int i)
 		i++;
 		tmp_path = full_path(splited_path[i], cmd);
 		if (!tmp_path)
-			return (free_arrs((void **) splited_path), ft_error("a"), NULL);
+			return (free_arrs((void **) splited_path), ft_error("find_path"), NULL);
 	}
 	free_arrs((void **) splited_path);
 	if (in_dir == 1)
