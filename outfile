@@ -1,2 +1,9 @@
-14
-
+total 28
+drwxr-xr-x  2 sokaraku 2023_paris  105 Feb 10 15:15 .
+drwxr-xr-x 11 sokaraku 2023_paris 4096 Feb 10 16:06 ..
+-rw-r--r--  1 sokaraku 2023_paris 3187 Feb 10 15:16 find_path.c
+-rw-r--r--  1 sokaraku 2023_paris 3322 Feb  9 15:51 parsing.c
+-rw-r--r--  1 sokaraku 2023_paris 2653 Feb 10 15:58 pipex.c
+-rw-r--r--  1 sokaraku 2023_paris  946 Feb  8 13:59 processes.c
+-rw-r--r--  1 sokaraku 2023_paris 3863 Feb  9 12:42 test.c
+-rw-r--r--  1 sokaraku 2023_paris  992 Feb 10 15:15 utils.c

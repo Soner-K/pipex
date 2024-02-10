@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:06:51 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/09 15:37:44 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:15:59 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_path
 	char	**cmds;
 }			t_path;
 
-void ft_error(char *str);
 char		*find_path(char **env, char *cmd, int i);
-char		**cmd_array(char **av, int *next_cmd);
+void		error_handler(char *msg);
+char		exec_process(char *cmd, char **envp, t_process *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 17:59:28 by sokaraku          #+#    #+#             */
-/*   Updated: 2023/12/21 10:25:42 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:52:36 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*ft_cut(char const *s, char c, size_t *pos)
 		(*pos)++;
 	str = (char *)malloc((*pos - first_pos + 1) * sizeof(char));
 	if (!str)
-		return (str);
+		return (NULL);
 	while (first_pos + i < *pos)
 	{
 		str[i] = s[first_pos + i];

@@ -6,7 +6,6 @@ LIBFT				=	$(addprefix $(LIBRARY_PATH)/,$(LIBRARY))
 
 FILES				=	pipex.c \
 						utils.c \
-						find_path.c \
 
 SRC_DIR				=	src
 SRC					=	$(addprefix $(SRC_DIR)/,$(FILES))
