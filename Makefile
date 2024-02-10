@@ -1,52 +1,42 @@
-CC					=	cc
-
-CFLAGS				=	-Wall -Wextra -Werror -g3
+NAME				=	pipex
 
 LIBRARY_PATH		=	libft
-
 LIBRARY				=	libft.a
-
 LIBFT				=	$(addprefix $(LIBRARY_PATH)/,$(LIBRARY))
 
 FILES				=	pipex.c \
 						utils.c \
 						find_path.c \
-						
+
 SRC_DIR				=	src
-
-OBJ_DIR				= 	obj
-
-OBJ					= $(addprefix $(OBJ_DIR)/,$(FILES:.c=.o))
-
 SRC					=	$(addprefix $(SRC_DIR)/,$(FILES))
 
-NAME				=	pipex
+OBJ_DIR				= 	obj
+OBJ					=	$(addprefix $(OBJ_DIR)/,$(FILES:.c=.o))
 
+CC					=	cc
+CFLAGS				=	-Wall -Wextra -Werror -g3
 
 all					:	$(NAME)
 
-e					:	
-						@echo "$(OBJ)"
-						@echo "$(SRC)"
-
-$(OBJ_DIR)			:	
-						mkdir -p $@
-
-$(OBJ_DIR)/%.o		:	%.c
-						$(CC) $(CFLAGS) -c $< -o $@
-						@printf "$(YELLOW)%s created $(FACE_ZZZ)\n$(COLOR_END)" $@
-
+$(OBJ_DIR)			:
+						@mkdir -p $@
 
 $(NAME)				:	$(OBJ_DIR) $(OBJ)
+						@echo "\n"
 						@echo "$(LYELLOW)Compiling libft... $(COLOR_END) $(FACE_YAWNING)"
 						@make -s -C $(LIBRARY_PATH)
-						@echo "$(GREEN)libft compiled. $(COLOR_END) $(FACE_MELT)"
+						@echo "$(GREEN)libft compiled. $(COLOR_END) $(FACE_MELT)\n"
 						@echo "$(LYELLOW)Compiling pipex... $(COLOR_END) $(FACE_SHAKING)"
 						@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 						@echo "$(GREEN)pipex compiled $(COLOR_END) $(FACE_EXPLODING) $(HACKERMAN)"
 
+$(OBJ_DIR)/%.o		:	$(SRC_DIR)/%.c
+						$(CC) $(CFLAGS) -c $< -o $@
+						@printf "$(YELLOW)%s created $(FACE_ZZZ)\n$(COLOR_END)" $@
+
 clean				:
-						@rm -f $(OBJ)
+						@rm -rf $(OBJ_DIR)
 						@make -s -C libft clean
 						@echo "$(BLUE)Removing object files... $(COLOR_END)$(FACE_SHAKING)"
 						@sleep 0.2
@@ -54,10 +44,10 @@ clean				:
 
 fclean				:	clean
 						@echo "$(YELLOW) *******************************$(COLOR_END)"
-						@echo "$(BLUE)Removing pipex $(COLOR_END) $(FACE_SHAKING)"
+						@echo "$(BLUE)Removing pipex's executable $(COLOR_END) $(FACE_SHAKING)"
 						@rm -f $(NAME)
 						@make -s -C libft fclean
-						@echo "$(LBLUE)Pipex removed $(COLOR_END) $(MAN_BYE)"
+						@echo "$(LBLUE)Pipex's executable removed $(COLOR_END) $(MAN_BYE)"
 
 re					:	fclean all
 
