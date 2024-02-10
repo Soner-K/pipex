@@ -33,7 +33,7 @@ $(NAME)				:	$(OBJ_DIR) $(OBJ)
 
 $(OBJ_DIR)/%.o		:	$(SRC_DIR)/%.c
 						$(CC) $(CFLAGS) -c $< -o $@
-						@printf "$(YELLOW)%s created $(FACE_ZZZ)\n$(COLOR_END)" $@
+						@printf "$(YELLOW)%s created $(FACE_ESCUZME)\n$(COLOR_END)" $@
 
 clean				:
 						@rm -rf $(OBJ_DIR)
@@ -59,7 +59,7 @@ HACKERMAN			=	🧑‍💻
 
 MAN_BYE				=	🙋‍♂️
 
-FACE_ZZZ			=	🤓
+FACE_ESCUZME		=	🤓
 
 FACE_SHAKING		=	🫨
 
