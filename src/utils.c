@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:21:44 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/11 12:44:05 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/11 13:59:20 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ static char	*full_path(char *dir, char *cmd)
  */
 char	*find_path(char **env, char *cmd, int i)
 {
-	char **splited_path;
-	char *tmp_path;
-	char in_dir;
+	char	**splited_path;
+	char	*tmp_path;
+	char	in_dir;
 
 	if (!env || !cmd)
 		return (NULL);

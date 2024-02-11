@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:25:26 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/11 13:57:01 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:00:15 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ static void	check_args(int argc, char **argv, t_process *data)
 	}
 }
 
-
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_process	data;
@@ -77,11 +75,5 @@ int	main(int argc, char **argv, char **envp)
 	check_args(argc, argv, &data);
 	prepare_args(argc, argv, &data);
 	ft_exec(argc, argv, envp, &data);
-	// if (data.id == 0)
-	// 	if (exec_process(argv[2], envp, &data) == -1)
-	// 		exit(EXIT_FAILURE);
-	// waitpid(data.id, data.info_id, WNOHANG);
-	// if (exec_process(argv[3], envp, &data) == -1)
-	// 	exit(EXIT_FAILURE);
 	exit(EXIT_SUCCESS);
 }
