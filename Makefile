@@ -4,7 +4,8 @@ LIBRARY_PATH		=	libft
 LIBRARY				=	libft.a
 LIBFT				=	$(addprefix $(LIBRARY_PATH)/,$(LIBRARY))
 
-FILES				=	pipex.c \
+FILES				=	executions.c \
+						pipex.c \
 						utils.c \
 
 SRC_DIR				=	src

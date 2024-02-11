@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:06:51 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/11 12:05:26 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/11 13:58:16 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ typedef struct s_path
 	char	**cmds;
 }			t_path;
 
-char		*find_path(char **env, char *cmd, int i);
 void		error_handler(char *msg);
-char		exec_mandatory(char *cmd, char **envp, t_process *data);
-void		exec_mpipes(char **cmds, char *path, char **envp, t_process *data);
+char		*find_path(char **env, char *cmd, int i);
+void		ft_exec(int argc, char **argv, char **envp, t_process *data);
 
 #endif
