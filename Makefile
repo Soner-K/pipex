@@ -39,14 +39,14 @@ clean				:
 						@make -s -C libft clean
 						@echo "$(BLUE)Removing object files... $(COLOR_END)$(FACE_SHAKING)"
 						@sleep 0.2
-						@echo "$(LBLUE)Object files removed $(COLOR_END)$(MAN_BYE)"
+						@echo "$(LBLUE)Object files removed $(COLOR_END)$(BYE)"
 
 fclean				:	clean
 						@echo "$(YELLOW) *******************************$(COLOR_END)"
 						@echo "$(BLUE)Removing pipex's executable $(COLOR_END) $(FACE_SHAKING)"
 						@rm -f $(NAME)
 						@make -s -C libft fclean
-						@echo "$(LBLUE)Pipex's executable removed $(COLOR_END) $(MAN_BYE)"
+						@echo "$(LBLUE)Pipex's executable removed $(COLOR_END) $(BYE)"
 
 re					:	fclean all
 
@@ -56,7 +56,7 @@ re					:	fclean all
 
 HACKERMAN			=	🧑‍💻
 
-MAN_BYE				=	🙋‍♂️
+BYE					=	🙋
 
 FACE_ESCUZME		=	🤓
 

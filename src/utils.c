@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:21:44 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/10 18:14:11 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/11 12:44:05 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ static char	is_in_dir(char *path, char *in_dir)
 /**
  * @brief Adds /"cmd" to one of PATH's directory.
  * @param dir A pointer to a string containing a PATH directory.
- * @param cmd The command to look for.
+ * @param cmd The path to the command's executable.
  * @returns The complete path containing the cmd, which will then be used
  * to check if the new path contains the executable of cmd.
  */
 static char	*full_path(char *dir, char *cmd)
 {
-	char		*new;
-	size_t		size;
+	char	*new;
+	size_t	size;
 
 	if (!dir || !cmd)
 		return (NULL);
@@ -58,21 +58,21 @@ static char	*full_path(char *dir, char *cmd)
 	return (new);
 }
 
-//ajouter si path existe
+// ajouter si path existe
 
 /**
  * @brief Given an environment variable, finds the directory in which
  * the executable of the command is.
- * @param	env The environment variable.
- * @param	cmd The command to look for.
- * @param	i A variable used for incrementation.
+ * @param env Environment variable.
+ * @param cmd The path to the command's executable.
+ * @param i A variable used for incrementation.
  * @returns The path to the command's executable.
  */
 char	*find_path(char **env, char *cmd, int i)
 {
-	char	**splited_path;
-	char	*tmp_path;
-	char	in_dir;
+	char **splited_path;
+	char *tmp_path;
+	char in_dir;
 
 	if (!env || !cmd)
 		return (NULL);
@@ -89,9 +89,10 @@ char	*find_path(char **env, char *cmd, int i)
 		i++;
 		tmp_path = full_path(splited_path[i], cmd);
 		if (!tmp_path)
-			return (free_arrs((void **) splited_path), perror("command not found"), NULL);
+			return (free_arrs((void **)splited_path),
+				perror("command not found"), NULL);
 	}
-	free_arrs((void **) splited_path);
+	free_arrs((void **)splited_path);
 	if (in_dir == 1)
 		return (tmp_path);
 	return (perror("command not found"), NULL);
