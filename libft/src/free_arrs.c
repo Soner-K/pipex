@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:19:01 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/10 14:42:08 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:20:40 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	free_arrs(void **arrs)
 	int	i;
 
 	i = 0;
+	if (!arrs)
+		return ;
 	while (arrs[i])
 	{
 		free(arrs[i]);

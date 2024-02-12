@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:25:26 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/11 14:00:15 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/12 20:17:19 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@
  */
 static void	prepare_args(int argc, char **argv, t_process *data)
 {
-	data->fd_infile = open(argv[1], R_OK);
-	if (data->fd_infile == -1)
+	if (data->config != HERE_DOC)
+		data->fd_in = open(argv[1], R_OK);
+	if (data->config != HERE_DOC && data->fd_in == -1)
 		error_handler("");
 	if (data->config == HERE_DOC)
-		data->fd_outfile = open(argv[argc - 1], WR | TR | CR | AP, 0644);
-	// bon 0644?
+		data->fd_out = open(argv[argc - 1], CR | R_W | AP, 0644);
 	else
-		data->fd_outfile = open(argv[argc - 1], WR | TR | CR, 0644);
-	if (data->fd_outfile == -1)
+		data->fd_out = open(argv[argc - 1], WR | TR | CR, 0644);
+	if (data->fd_out == -1)
 		error_handler("");
 	if (data->config == MANDATORY)
 	{

@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 17:14:50 by sokaraku          #+#    #+#             */
-/*   Updated: 2023/12/20 13:57:15 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:56:39 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 20
+#  define BUFFER_SIZE 1
 # endif
 
 # include <stdlib.h>
 # include <unistd.h>
 
-size_t	ft_strlen(char const *s);
+size_t	ft_strlen2(char const *s);
 int		ft_check(char const *s, char c);
 char	*ft_fuse(char *s1, char *s2);
 

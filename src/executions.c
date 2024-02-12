@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:55:05 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/11 14:00:50 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/12 20:16:22 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,39 +18,33 @@
  * including pipe's fds and the infile's and outfile's fd.
  * @returns void.
  */
-static void	files_handler(t_process *data)
+void	files_handler(t_process *dt)
 {
-	if (data->id == 0)
+	if (dt->id == 0)
 	{
-		close(data->fds[0]);
-		if (dup2(data->fd_infile, STDIN_FILENO) == -1)
+		if (dup2(dt->fd_in, STDIN_FILENO) == -1)
+			error_handler("27");
+		if (dup2(dt->fds[1], STDOUT_FILENO) == -1)
 			error_handler("29");
-		if (dup2(data->fds[1], STDOUT_FILENO) == -1)
-			error_handler("31");
-		close(data->fds[1]);
-		close(data->fd_infile);
-		close(data->fd_outfile);
+		close_handler(4, dt->fds[0], dt->fds[1], dt->fd_in, dt->fd_out);
 		return ;
 	}
-	close(data->fds[1]);
-	if (dup2(data->fds[0], STDIN_FILENO) == -1)
+	if (dup2(dt->fds[0], STDIN_FILENO) == -1)
+		error_handler("37");
+	if (dup2(dt->fd_out, STDOUT_FILENO) == -1)
 		error_handler("39");
-	if (dup2(data->fd_outfile, STDOUT_FILENO) == -1)
-		error_handler("41");
-	close(data->fds[0]);
-	close(data->fd_outfile);
-	close(data->fd_infile);
+	close_handler(4, dt->fds[0], dt->fds[1], dt->fd_in, dt->fd_out);
 	return ;
 }
 
 /**
- * @brief Execute a process (used in the mandatory part, i.e only one pipe).
+ * @brief Execute a process
  * @param cmd The path to the command's executable.
  * @param emvp Environment variable.
  * @param data A pointer to a structure containing multiple variables.
  * @returns -1 in case of an error.
  */
-static char	exec_mandatory(char *cmd, char **envp, t_process *data)
+char	exec_one(char *cmd, char **envp, t_process *data)
 {
 	t_path	utils;
 
@@ -67,7 +61,7 @@ static char	exec_mandatory(char *cmd, char **envp, t_process *data)
 		// perror("malloc (exec_process)");
 		return (-1);
 	}
-	if (data->config == MANDATORY)
+	if (data->config != MULTIPLE_PIPES)
 		files_handler(data);
 	execve(utils.path, utils.cmds, envp);
 	free(utils.path);
@@ -150,19 +144,21 @@ void	ft_exec(int argc, char **argv, char **envp, t_process *data)
 	if (data->config == MANDATORY)
 	{
 		if (data->id == 0)
-			if (exec_mandatory(argv[2], envp, data) == -1)
+			if (exec_one(argv[2], envp, data) == -1)
 				exit(EXIT_FAILURE);
 		waitpid(data->id, data->info_id, WNOHANG);
-		if (exec_mandatory(argv[3], envp, data) == -1)
+		if (exec_one(argv[3], envp, data) == -1)
 			exit(EXIT_FAILURE);
 	}
 	else if (data->config == MULTIPLE_PIPES)
 	{
 		while (i < argc - 2)
 			pipe_it(argv[i++], envp);
-		dup2(data->fd_outfile, STDOUT_FILENO);
-		close(data->fd_infile);
-		close(data->fd_outfile);
-		exec_mandatory(argv[i], envp, data);
+		dup2(data->fd_out, STDOUT_FILENO);
+		close(data->fd_in);
+		close(data->fd_out);
+		exec_one(argv[i], envp, data); //wait?
 	}
+	else
+		pipe_here_doc(argc, argv, envp, data);
 }

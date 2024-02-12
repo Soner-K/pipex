@@ -6,11 +6,21 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:21:44 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/11 13:59:20 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:09:33 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
+
+void	close_handler(int size, ...)
+{
+	va_list	arg;
+
+	va_start(arg, size);
+	while (size--)
+		close(va_arg(arg, int));
+	va_end(arg);
+}
 
 void	error_handler(char *msg)
 {

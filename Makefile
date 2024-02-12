@@ -5,6 +5,7 @@ LIBRARY				=	libft.a
 LIBFT				=	$(addprefix $(LIBRARY_PATH)/,$(LIBRARY))
 
 FILES				=	executions.c \
+						here_doc.c \
 						pipex.c \
 						utils.c \
 
