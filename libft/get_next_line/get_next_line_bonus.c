@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 17:13:58 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/12 15:46:00 by sokaraku         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:12:14 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*file_to_keep(int fd, char *keep, int *bytes_read)
 {
 	char	*tmp;
-	
+
 	while (!ft_check(keep, '\n') && (*bytes_read) > 0)
 	{
 		tmp = malloc(sizeof(char) * BUFFER_SIZE + 1);
@@ -49,7 +49,7 @@ char	*keep_to_line(char *keep)
 	if (ft_check(keep, '\n'))
 		line = malloc(sizeof(char) * ft_check(keep, '\n') + 2);
 	else
-		line = malloc(sizeof(char) * ft_strlen2(keep) + 1);
+		line = malloc(sizeof(char) * ft_strlen(keep) + 1);
 	if (!line)
 		return (NULL);
 	while (keep[i] != '\n' && keep[i])
@@ -73,8 +73,8 @@ char	*remove_from_keep(char *line, char *keep)
 	char	*new_keep;
 	char	*to_del;
 
-	i = ft_strlen2(line);
-	j = ft_strlen2(keep);
+	i = ft_strlen(line);
+	j = ft_strlen(keep);
 	to_del = keep;
 	if (!line || !keep || (j == i))
 	{

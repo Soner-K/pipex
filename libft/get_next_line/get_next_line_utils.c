@@ -6,13 +6,13 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:34:49 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/12 12:51:03 by sokaraku         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:57:48 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen2(char const *s)
+size_t	ft_strlen(char const *s)
 {
 	size_t	i;
 
@@ -52,7 +52,7 @@ char	*ft_fuse(char *s1, char *s2)
 	j = 0;
 	if (!s1 && !s2)
 		return (NULL);
-	new = malloc(sizeof(char) * (ft_strlen2(s1) + ft_strlen2(s2)) + 1);
+	new = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
 	if (!new)
 		return (NULL);
 	if (s1)

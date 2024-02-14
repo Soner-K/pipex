@@ -4,10 +4,8 @@ LIBRARY_PATH		=	libft
 LIBRARY				=	libft.a
 LIBFT				=	$(addprefix $(LIBRARY_PATH)/,$(LIBRARY))
 
-FILES				=	executions.c \
-						here_doc.c \
-						pipex.c \
-						utils.c \
+FILES				=	utils.c \
+						path_finding.c \
 
 SRC_DIR				=	src
 SRC					=	$(addprefix $(SRC_DIR)/,$(FILES))
@@ -16,7 +14,7 @@ OBJ_DIR				= 	obj
 OBJ					=	$(addprefix $(OBJ_DIR)/,$(FILES:.c=.o))
 
 CC					=	cc
-CFLAGS				=	-Wall -Wextra -Werror -g3
+CFLAGS				=	-Wall -Wextra -Werror -g3 -I includes
 
 all					:	$(NAME)
 
