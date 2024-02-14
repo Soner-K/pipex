@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 12:30:57 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/14 12:40:26 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:55:53 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,46 +30,45 @@ static char	is_a_path(char *cmd)
 
 static char	*full_path(char *dir, char *cmd)
 {
-	char	*new;
+	char	*path;
 	size_t	size;
 
 	if (!dir || !cmd)
 		return (NULL);
 	size = ft_strlen(dir) + ft_strlen(cmd) + 1;
-	new = (char *)ft_calloc(size + 2, sizeof(char));
-	if (!new)
+	path = (char *)ft_calloc(size + 2, sizeof(char));
+	if (!path)
 		return (NULL);
-	ft_memcpy(new, dir, ft_strlen(dir));
-	new[ft_strlen(dir)] = '/';
-	ft_memcpy(new + ft_strlen(dir) + 1, cmd, ft_strlen(cmd));
-	new[size] = '\0';
-	return (new);
+	ft_memcpy(path, dir, ft_strlen(dir));
+	path[ft_strlen(dir)] = '/';
+	ft_memcpy(path + ft_strlen(dir) + 1, cmd, ft_strlen(cmd));
+	path[size] = '\0';
+	return (path);
 }
 
 char	*find_path(char *cmd, char **envp, int i)
 {
 	t_paths	utils;
+	char	*s;
 
-	if (!cmd || !envp)
-		return (NULL);
-	if (is_a_path(cmd) || !access(cmd, F_OK | X_OK))
-		return (cmd);
+	// if (!cmd || !envp)
+	// 	return (NULL);
 	utils.cmds = ft_split(cmd, ' ');
 	if (!utils.cmds)
-		error_handler("Allocation failed", 0);
+		error_handler("malloc", NULL, 0);
+	if (is_a_path(*utils.cmds) || !access(*utils.cmds, F_OK | X_OK))
+		return (s = ft_strdup(*utils.cmds), free_arrs((void **)utils.cmds), s);
 	while (ft_strncmp(*envp, "PATH=", 5))
 		envp++;
-	while (*envp && (**envp) != '/')
-		(*envp)++;
 	utils.all_paths = ft_split(*envp, ':');
 	if (!utils.all_paths)
-		error_handler("Allocation failed", 1, utils.cmds);
+		error_handler("", NULL, 1, utils.cmds);
 	utils.path = NULL;
 	while (utils.all_paths[i] && is_in_dir(utils.path) != 1)
 	{
 		utils.path = full_path(utils.all_paths[i], utils.cmds[0]);
 		if (!utils.path)
-			error_handler("Allocation failed", 2, utils.all_paths, utils.cmds);
+			error_handler("malloc", NULL, 2, utils.all_paths, utils.cmds);
 		i++;
 	}
 	return (free_multiple_arrs(2, utils.all_paths, utils.cmds), utils.path);
