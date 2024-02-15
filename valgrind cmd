@@ -1,0 +1,1 @@
+valgrind --show-leak-kinds=all --leak-check=full --trace-children=yes --track-fds=yes --suppressions=valgrind.supp  ./pipex "ls" "wc"

@@ -1,0 +1,15 @@
+{
+	<???>
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	...
+	fun:(below main)
+}
+
+{
+	<???>
+	Memcheck:Leak
+	match-leak-kinds: possible
+	...
+	fun:(below main)
+}
