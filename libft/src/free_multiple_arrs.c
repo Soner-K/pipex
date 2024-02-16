@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_arrs.c                                        :+:      :+:    :+:   */
+/*   free_multiple_arrs.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 11:19:01 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/08 12:20:40 by sokaraku         ###   ########.fr       */
+/*   Created: 2024/02/16 18:55:14 by sokaraku          #+#    #+#             */
+/*   Updated: 2024/02/16 18:55:55 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-void	free_arrs(void **arrs)
+void	free_multiple_arrs(int n, ...)
 {
-	int	i;
+	va_list	arg;
 
-	i = 0;
-	if (!arrs)
-		return ;
-	while (arrs[i])
-	{
-		free(arrs[i]);
-		i++;
-	}
-	free(arrs[i]);
-	free(arrs);
+	va_start(arg, n);
+	while (n--)
+		free_arrs((void **)va_arg(arg, char **));
+	va_end(arg);
 }

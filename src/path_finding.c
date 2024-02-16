@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 12:30:57 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/14 18:55:53 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/16 16:34:51 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ char	*find_path(char *cmd, char **envp, int i)
 	t_paths	utils;
 	char	*s;
 
-	// if (!cmd || !envp)
-	// 	return (NULL);
 	utils.cmds = ft_split(cmd, ' ');
 	if (!utils.cmds)
 		error_handler("malloc", NULL, 0);

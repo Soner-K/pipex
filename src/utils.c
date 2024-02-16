@@ -6,21 +6,11 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:11:57 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/14 17:24:42 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:56:19 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	close_handler(int size, ...)
-{
-	va_list	arg;
-
-	va_start(arg, size);
-	while (size--)
-		close(va_arg(arg, int));
-	va_end(arg);
-}
 
 void	error_handler(char *msg, t_process *data, int n, ...)
 {
@@ -41,14 +31,12 @@ void	error_handler(char *msg, t_process *data, int n, ...)
 	exit(EXIT_FAILURE);
 }
 
-void	free_multiple_arrs(int n, ...)
+void	ft_exec(char **envp, char *path, char **cmds)
 {
-	va_list	arg;
-
-	va_start(arg, n);
-	while (n--)
-		free_arrs((void **) va_arg(arg, char **));
-	va_end(arg);
+	execve(path, cmds, envp);
+	free(path);
+	free_arrs((void **)cmds);
+	error_handler("execve", NULL, 0);
 }
 
 // int	main(int argc, char **av, char **envp)

@@ -8,6 +8,10 @@ FILES				=	utils.c \
 						path_finding.c \
 						pipex.c		\
 
+MANDATORY			=	src/pipex.c \
+
+BONUS				= 	src/pipex_bonus.c \
+
 SRC_DIR				=	src
 SRC					=	$(addprefix $(SRC_DIR)/,$(FILES))
 
@@ -22,7 +26,7 @@ all					:	$(NAME)
 $(OBJ_DIR)			:
 						@mkdir -p $@
 
-$(NAME)				:	$(OBJ_DIR) $(OBJ)
+$(NAME)				:	$(OBJ_DIR) $(OBJ) $(MANDATORY_OBJ)
 						@echo "\n"
 						@echo "$(LYELLOW)Compiling libft... $(COLOR_END) $(FACE_YAWNING)"
 						@make -s -C $(LIBRARY_PATH)
@@ -34,6 +38,8 @@ $(NAME)				:	$(OBJ_DIR) $(OBJ)
 $(OBJ_DIR)/%.o		:	$(SRC_DIR)/%.c
 						$(CC) $(CFLAGS) -c $< -o $@
 						@printf "$(YELLOW)%s created $(FACE_ESCUZME)\n$(COLOR_END)" $@
+
+bonus				:	$(OBJ_DIR) $(OBJ) $(BONUS_OBJ)
 
 clean				:
 						@rm -rf $(OBJ_DIR)
@@ -51,7 +57,7 @@ fclean				:	clean
 
 re					:	fclean all
 
-.PHONY				:	all clean fclean re
+.PHONY				:	all clean fclean re bonus
 
 
 

@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_arrs.c                                        :+:      :+:    :+:   */
+/*   print_and_exit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 11:19:01 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/08 12:20:40 by sokaraku         ###   ########.fr       */
+/*   Created: 2024/02/16 18:54:12 by sokaraku          #+#    #+#             */
+/*   Updated: 2024/02/16 18:54:33 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-void	free_arrs(void **arrs)
+void	print_and_exit(char *msg)
 {
-	int	i;
-
-	i = 0;
-	if (!arrs)
-		return ;
-	while (arrs[i])
-	{
-		free(arrs[i]);
-		i++;
-	}
-	free(arrs[i]);
-	free(arrs);
+	ft_putendl_fd(msg, 2);
+	exit(EXIT_FAILURE);
 }

@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_arrs.c                                        :+:      :+:    :+:   */
+/*   close_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 11:19:01 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/08 12:20:40 by sokaraku         ###   ########.fr       */
+/*   Created: 2024/02/16 18:56:34 by sokaraku          #+#    #+#             */
+/*   Updated: 2024/02/16 19:03:47 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-void	free_arrs(void **arrs)
+void	close_handler(int size, ...)
 {
-	int	i;
+	va_list	arg;
+	int		fd;
 
-	i = 0;
-	if (!arrs)
-		return ;
-	while (arrs[i])
+	va_start(arg, size);
+	while (size--)
 	{
-		free(arrs[i]);
-		i++;
+		fd = va_arg(arg, int);
+		if (fd >= 0)
+			close(fd);
 	}
-	free(arrs[i]);
-	free(arrs);
+	va_end(arg);
 }
