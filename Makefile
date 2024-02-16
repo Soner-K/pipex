@@ -6,11 +6,12 @@ LIBFT				=	$(addprefix $(LIBRARY_PATH)/,$(LIBRARY))
 
 FILES				=	utils.c \
 						path_finding.c \
-						pipex.c		\
 
 MANDATORY			=	src/pipex.c \
+MANDATORY_OBJ		=	$(MANDATORY:.c=.o)
 
 BONUS				= 	src/pipex_bonus.c \
+BONUS_OBJ			=	$(BONUS:.c=.o)
 
 SRC_DIR				=	src
 SRC					=	$(addprefix $(SRC_DIR)/,$(FILES))
@@ -35,11 +36,22 @@ $(NAME)				:	$(OBJ_DIR) $(OBJ) $(MANDATORY_OBJ)
 						@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 						@echo "$(GREEN)pipex compiled $(COLOR_END) $(FACE_EXPLODING) $(HACKERMAN)"
 
+# $(MANDATORY_OBJ)/%.o : $(MANDATORY_FILES)/%.c
+# 					$(CC) $(CFLAGS) -c $< -o $@
+# 					@printf "$(YELLOW)%s created $(COLOR_END)\n" $@
+
 $(OBJ_DIR)/%.o		:	$(SRC_DIR)/%.c
 						$(CC) $(CFLAGS) -c $< -o $@
-						@printf "$(YELLOW)%s created $(FACE_ESCUZME)\n$(COLOR_END)" $@
+						@printf "$(YELLOW)%s created $(COLOR_END)\n" $@
 
-bonus				:	$(OBJ_DIR) $(OBJ) $(BONUS_OBJ)
+bonus				:	$(OBJ_DIR) $(OBJ) $(OBJ_BONUS)
+						@echo "\n"
+						@echo "$(LYELLOW)Compiling libft... $(COLOR_END) $(FACE_YAWNING)"
+						@make -s -C $(LIBRARY_PATH)
+						@echo "$(GREEN)libft compiled. $(COLOR_END) $(FACE_MELT)\n"
+						@echo "$(LYELLOW)Compiling pipex bonus... $(COLOR_END) $(FACE_SHAKING)"
+						@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+						@echo "$(GREEN)pipex bonus compiled $(COLOR_END) $(FACE_EXPLODING) $(HACKERMAN)"
 
 clean				:
 						@rm -rf $(OBJ_DIR)
