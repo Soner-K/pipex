@@ -1,5 +1,0 @@
-total 152
-drwxrwxr-x 2 sokaraku sokaraku   4096 févr. 16 23:17 includes
-drwxrwxr-x 6 sokaraku sokaraku   4096 févr. 16 23:20 libft
--rw-rw-r-- 1 sokaraku sokaraku   2479 févr. 16 23:25 Makefile
--rw-rw-r-- 1 sokaraku sokaraku    156 févr. 16 23:17 valgrind.supp

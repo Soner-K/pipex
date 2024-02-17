@@ -5,16 +5,16 @@ LIBRARY				=	libft.a
 LIBFT				=	$(addprefix $(LIBRARY_PATH)/,$(LIBRARY))
 
 FILES				=	utils.c \
-						path_finding.c \
-
-MANDATORY			=	src/pipex.c \
-MANDATORY_OBJ		=	$(MANDATORY:.c=.o)
-
-BONUS				= 	src/pipex_bonus.c \
-BONUS_OBJ			=	$(BONUS:.c=.o)
-
+						path_finding.c
 SRC_DIR				=	src
 SRC					=	$(addprefix $(SRC_DIR)/,$(FILES))
+
+MANDATORY			=	pipex.c
+MANDATORY_OBJ		=	$(addprefix $(OBJ_DIR)/,$(MANDATORY:.c=.o))
+
+BONUS				= 	pipex_bonus.c	\
+						here_doc.c
+OBJ_BONUS			=	$(addprefix $(OBJ_DIR)/,$(BONUS:.c=.o))
 
 OBJ_DIR				= 	obj
 OBJ					=	$(addprefix $(OBJ_DIR)/,$(FILES:.c=.o))
@@ -33,16 +33,8 @@ $(NAME)				:	$(OBJ_DIR) $(OBJ) $(MANDATORY_OBJ)
 						@make -s -C $(LIBRARY_PATH)
 						@echo "$(GREEN)libft compiled. $(COLOR_END) $(FACE_MELT)\n"
 						@echo "$(LYELLOW)Compiling pipex... $(COLOR_END) $(FACE_SHAKING)"
-						@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+						@$(CC) $(CFLAGS) $(OBJ) $(MANDATORY_OBJ) $(LIBFT) -o $(NAME)
 						@echo "$(GREEN)pipex compiled $(COLOR_END) $(FACE_EXPLODING) $(HACKERMAN)"
-
-# $(MANDATORY_OBJ)/%.o : $(MANDATORY_FILES)/%.c
-# 					$(CC) $(CFLAGS) -c $< -o $@
-# 					@printf "$(YELLOW)%s created $(COLOR_END)\n" $@
-
-$(OBJ_DIR)/%.o		:	$(SRC_DIR)/%.c
-						$(CC) $(CFLAGS) -c $< -o $@
-						@printf "$(YELLOW)%s created $(COLOR_END)\n" $@
 
 bonus				:	$(OBJ_DIR) $(OBJ) $(OBJ_BONUS)
 						@echo "\n"
@@ -50,8 +42,22 @@ bonus				:	$(OBJ_DIR) $(OBJ) $(OBJ_BONUS)
 						@make -s -C $(LIBRARY_PATH)
 						@echo "$(GREEN)libft compiled. $(COLOR_END) $(FACE_MELT)\n"
 						@echo "$(LYELLOW)Compiling pipex bonus... $(COLOR_END) $(FACE_SHAKING)"
-						@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+						@$(CC) $(CFLAGS) $(OBJ) $(OBJ_BONUS) $(LIBFT) -o $(NAME)
 						@echo "$(GREEN)pipex bonus compiled $(COLOR_END) $(FACE_EXPLODING) $(HACKERMAN)"
+
+$(OBJ_DIR)/%.o		:	$(addprefix $(SRC_DIR)/, $(MANDATORY))/%.c
+						$(CC) $(CFLAGS) -c $< -o $@
+						@printf "$(YELLOW)%s created $(FACE_ESCUZME)$(COLOR_END)\n" $@
+
+$(OBJ_DIR)/%.o		:	$(addprefix $(SRC_DIR)/, $(BONUS))/%.c
+						$(CC) $(CFLAGS) -c $< -o $@
+						@printf "$(YELLOW)%s created $(FACE_ESCUZME)$(COLOR_END)\n" $@
+
+$(OBJ_DIR)/%.o		:	$(SRC_DIR)/%.c
+						$(CC) $(CFLAGS) -c $< -o $@
+						@printf "$(YELLOW)%s created $(FACE_ESCUZME)$(COLOR_END)\n" $@
+
+
 
 clean				:
 						@rm -rf $(OBJ_DIR)
@@ -102,7 +108,6 @@ LYELLOW				=	\033[1;33m
 YELLOW				=	\033[33m
 
 COLOR_END			=	\033[0m
-
 
 
 

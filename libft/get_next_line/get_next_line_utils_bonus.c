@@ -6,13 +6,13 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 17:14:28 by sokaraku          #+#    #+#             */
-/*   Updated: 2023/12/07 17:57:39 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/17 19:01:22 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen(char const *s)
+size_t	find_len(char const *s)
 {
 	size_t	i;
 
@@ -52,7 +52,7 @@ char	*ft_fuse(char *s1, char *s2)
 	j = 0;
 	if (!s1 && !s2)
 		return (NULL);
-	new = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	new = malloc(sizeof(char) * (find_len(s1) + find_len(s2)) + 1);
 	if (!new)
 		return (NULL);
 	if (s1)

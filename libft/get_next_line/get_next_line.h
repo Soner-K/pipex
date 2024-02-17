@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 16:14:01 by sokaraku          #+#    #+#             */
-/*   Updated: 2023/12/20 13:58:14 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/17 19:01:56 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-size_t	ft_strlen(char const *s);
+size_t	find_len(char const *s);
 int		ft_check(char const *s, char c);
 char	*ft_fuse(char *s1, char *s2);
 

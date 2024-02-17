@@ -6,12 +6,18 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 12:30:57 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/16 16:34:51 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/17 19:16:06 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+/**
+ * @brief Checks if a given command is in a given path
+ * @param path A PATH's directory.
+ * @returns -1 if path is NULL, 0 if the command isn't foud and 1 if it is.
+ * If the command isn't found, the path's string is freed.
+ */
 static char	is_in_dir(char *path)
 {
 	if (!path)
@@ -20,14 +26,27 @@ static char	is_in_dir(char *path)
 		return (1);
 	return (free(path), 0);
 }
-
-static char	is_a_path(char *cmd)
+/**
+ * @brief Checks if there is a '/'.
+ * @param path A path to an executable.
+ * @returns 1 if there is a '/' (we assume the given path is correct,
+ * the execution won't work if it isn't, but it is handled.),
+ * 0 if there is no '\'.
+ */
+static char	is_a_path(char *path)
 {
-	if (ft_strnstr(cmd, "/", ft_strlen(cmd)))
+	if (ft_strnstr(path, "/", ft_strlen(path)))
 		return (1);
 	return (0);
 }
 
+/**
+ * @brief Joins a directory's path with a command.
+ * @param dir A path to a directory. 
+ * @param cmd The command to look for.
+ * @returns <dir>/<cmd>. NULL if there is no dir or no cmd,
+ * or if the allocation failed.
+ */
 static char	*full_path(char *dir, char *cmd)
 {
 	char	*path;
@@ -45,7 +64,14 @@ static char	*full_path(char *dir, char *cmd)
 	path[size] = '\0';
 	return (path);
 }
-
+/**
+ * @brief Finds the path of a given command, if it exists.
+ * @param cmd The command for which to look for a path.
+ * @param envp The environment varible.
+ * @param i A variable used for incrementation.
+ * @returns The path of a given command if it exists, if not, 
+ * error_handler is called.
+ */
 char	*find_path(char *cmd, char **envp, int i)
 {
 	t_paths	utils;
