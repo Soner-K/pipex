@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 17:59:52 by sokaraku          #+#    #+#             */
-/*   Updated: 2023/12/21 09:36:08 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:51:16 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	unsigned char	*s2_cp;
 
 	i = 0;
+	if (!s1)
+		return (*s2);
+	else if (!s2)
+		return (*s1);
+	else if (!s1 && !s2)
+		return (0);
 	s1_cp = (unsigned char *)s1;
 	s2_cp = (unsigned char *)s2;
 	while ((s1[i] || s2[i]) && i < n)

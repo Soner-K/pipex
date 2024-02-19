@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:01:44 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/16 19:04:37 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:15:27 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 void				free_arrs(void **arrs);
 void				close_handler(int size, ...);
 void				free_multiple_arrs(int n, ...);
-void				print_and_exit(char *msg);
+void				print_exit(char *msg);
 
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);

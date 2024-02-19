@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:11:57 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/18 21:15:27 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:15:32 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,11 @@ void	child(char *to_do, char **envp, char last, t_process *data)
 	char	**cmds;
 
 	cmds = ft_split(to_do, ' ');
+	// if (!cmds || !cmds[0])
+	// 	exit(EXIT_FAILURE);
 	path = find_path(*cmds, envp, 0);
+	// if (!path)
+	// 	exit(EXIT_FAILURE);
 	if (last == 0)
 	{
 		if (data->first_cmd == 0)
@@ -147,11 +151,25 @@ void	check_and_open(int argc, char **argv, t_process *data)
 	data->here_doc = 0;
 	data->fd_in = open(argv[1], O_RDONLY);
 	if (data->fd_in == -1)
-		print_and_exit("Failed to open infile");
+		print_exit("Failed to open infile");
 	data->fd_out = open(argv[argc - 1], O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (data->fd_out == -1)
 		return (close(data->fd_in), exit(EXIT_FAILURE));
 }
+
+// int    wait_childs(int pid)
+// {
+//     int    wstatus;
+//     int    code;
+
+//     code = EXIT_FAILURE;
+//     while (errno != ECHILD)
+//         if (wait(&wstatus) == pid && WIFEXITED(wstatus))
+//             code = WEXITSTATUS(wstatus);
+//     if (pid == -1)
+//         return (127);
+//     return (code);
+// }
 
 // int	main(int argc, char **av, char **envp)
 // {

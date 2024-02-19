@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 16:14:01 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/17 19:01:56 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:08:19 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 20
+#  define BUFFER_SIZE 1
 # endif
 
 # include <stdlib.h>
