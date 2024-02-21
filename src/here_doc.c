@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:31:07 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/21 11:29:08 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:16:59 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	store_in_here_doc(char *del, t_process *data, int fd_tmp)
 		if (str)
 			free(str);
 		ft_putstr_fd("pipe heredoc> ", 0);
-		str = get_next_line(0); // modif parametre
+		str = get_next_line(0);
 		if (!str)
 			return (data->use_p = 0, error_handler("", data, 0));
 		ft_putstr_fd(str, fd_tmp);

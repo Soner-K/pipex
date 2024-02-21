@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 12:30:57 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/21 12:48:26 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:19:17 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,13 @@ char	*find_path(char *cmd, char **envp, int i, t_process *dt)
 	t_paths	utils;
 	char	*s;
 
+	if (!cmd || !cmd[0])
+		return (dt->use_p = 0, error_handler(MKO, dt, 0), NULL);
 	utils.cmds = ft_split(cmd, ' ');
 	if (!utils.cmds)
 		return (dt->use_p = 0, error_handler(MKO, dt, 0), NULL);
 	if (is_a_path(*utils.cmds) || !access(*utils.cmds, F_OK | X_OK))
-		return (s = ft_strdup(*utils.cmds), free_arrs((void **)utils.cmds),
-			f_env(envp, dt), s);
+		return (s = ft_strdup(*utils.cmds), free_arrs((void **)utils.cmds), s);
 	while (*envp && ft_strncmp(*envp, "PATH=", 5))
 		envp++;
 	utils.all_paths = ft_split(*envp, ':');
@@ -120,6 +121,5 @@ char	*find_path(char *cmd, char **envp, int i, t_process *dt)
 					utils.cmds), NULL);
 		i++;
 	}
-	return (free_multiple_arrs(2, utils.all_paths, utils.cmds), f_env(envp,
-			dt), utils.path);
+	return (free_multiple_arrs(2, utils.all_paths, utils.cmds), utils.path);
 }

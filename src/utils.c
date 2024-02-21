@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:11:57 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/21 12:44:42 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:11:47 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	error_handler(char *msg, t_process *data, int n, ...)
 {
 	va_list	arg;
 
-	if (data->use_p == 1)
-		perror(msg);
-	else
+	if (data->use_p == 0)
 		ft_putendl_fd(msg, 2);
+	else
+		perror(msg);
 	if (!access(".tmp", F_OK))
 		unlink(".tmp");
 	va_start(arg, n);
@@ -37,9 +37,6 @@ void	error_handler(char *msg, t_process *data, int n, ...)
 	va_end(arg);
 	if (data)
 		close_handler(4, data->fd_in, data->fd_out, *data->fds, data->fds[1]);
-	if (data->env_modified == 1)
-		if (data->env)
-			free_arrs((void **)data->env);
 	exit(EXIT_FAILURE);
 }
 
@@ -84,7 +81,8 @@ void	pipex(int argc, char **argv, char **envp, t_process *data)
 			child(argv[i + 2], envp, i + 1 == (argc - 3), data);
 		else
 		{
-			dup2(data->fds[0], STDIN_FILENO);
+			if (dup2(data->fds[0], STDIN_FILENO) == -1)
+				error_handler("dup2", data, 0);
 			close_handler(2, data->fds[0], data->fds[1]);
 		}
 		i++;
@@ -116,14 +114,14 @@ void	child(char *to_do, char **envp, char last, t_process *data)
 	{
 		if (data->first_cmd == 0)
 			if (dup2(data->fd_in, STDIN_FILENO) == -1)
-				return (free(path), error_handler("dup2", data, 1, cmds));
+				return (free(path), error_handler("dup2a", data, 1, cmds));
 		if (dup2(data->fds[1], STDOUT_FILENO) == -1)
-			return (free(path), error_handler("dup2", data, 1, cmds));
+			return (free(path), error_handler("dup2b", data, 1, cmds));
 	}
 	else
 	{
 		if (dup2(data->fd_out, STDOUT_FILENO) == -1)
-			return (free(path), error_handler("dup2", data, 1, cmds));
+			return (free(path), error_handler("dup2c", data, 1, cmds));
 	}
 	close_handler(4, data->fds[0], data->fds[1], data->fd_in, data->fd_out);
 	ft_exec(envp, path, cmds);
@@ -141,7 +139,7 @@ void	check_and_open(int argc, char **argv, t_process *data)
 	if (!(ft_strncmp(argv[1], "here_doc", 8)))
 	{
 		if (argc != 6)
-			exit(EXIT_FAILURE);
+			print_exit("Wrong number of arguments");
 		data->here_doc = 1;
 		data->fd_in = open(".tmp", O_CREAT | O_TRUNC | O_RDWR, 0644);
 		if (data->fd_in == -1)

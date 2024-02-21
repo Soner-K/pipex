@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:35:15 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/21 11:15:30 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:04:05 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc < 5)
 		print_exit("Wrong number of arguments");
-	// if (!envp[0])
-	// 	print_exit("Environment not found");
+	if (!envp || !envp[0] || !check_for_path(envp))
+		print_exit("Environment not found");
 	check_and_open(argc, argv, &data);
-	init_struct(&data);
+	data.use_p = 1;
 	if (data.here_doc == 1)
 		here_doc(argv, envp, &data);
 	else
