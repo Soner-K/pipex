@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:35:15 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/19 19:22:28 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/21 07:14:52 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 		print_exit("Environment not found");
 	check_and_open(argc, argv, &data);
 	if (data.here_doc == 1)
-		here_doc(argv[2], &data, argc, argv, envp);
+		test(argv, envp, &data);
 	else
 		pipex(argc, argv, envp, &data);
 	while (wait(NULL) > 0)

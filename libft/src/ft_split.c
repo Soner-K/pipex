@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 17:59:28 by sokaraku          #+#    #+#             */
-/*   Updated: 2023/12/21 10:25:42 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/21 08:42:19 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	**ft_split(char const *s, char c)
 	size_t	pos;
 	size_t	i;
 
-	if (!s)
+	if (!s || !s[0])
 		return (NULL);
 	words = ft_count_words(s, c);
 	tab = ft_calloc(words + 1, sizeof(char *));
