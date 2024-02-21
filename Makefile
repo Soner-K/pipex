@@ -5,7 +5,9 @@ LIBRARY				=	libft.a
 LIBFT				=	$(addprefix $(LIBRARY_PATH)/,$(LIBRARY))
 
 FILES				=	utils.c \
-						path_finding.c
+						path_finding.c \
+						if_no_path.c \
+						
 SRC_DIR				=	src
 SRC					=	$(addprefix $(SRC_DIR)/,$(FILES))
 

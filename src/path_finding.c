@@ -6,11 +6,32 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 12:30:57 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/21 08:53:34 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:48:26 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+/**
+ * @brief CHecks if the PATH variable exists.
+ * @param envp The environment variable.
+ * @returns 0 if PATH isn't found, 1 otherwise.
+ */
+char	check_for_path(char **envp)
+{
+	int	i;
+
+	if (!envp)
+		return (0);
+	i = 0;
+	while (envp[i])
+	{
+		if (!ft_strncmp(envp[i], "PATH=", 5))
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 /**
  * @brief Checks if a given command is in a given path
@@ -26,6 +47,7 @@ static char	is_in_dir(char *path)
 		return (1);
 	return (free(path), 0);
 }
+
 /**
  * @brief Checks if there is a '/'.
  * @param path A path to an executable.
@@ -33,12 +55,12 @@ static char	is_in_dir(char *path)
  * the execution won't work if it isn't, but it is handled.),
  * 0 if there is no '\'.
  */
-// static char	is_a_path(char *path)
-// {
-// 	if (ft_strnstr(path, "/", ft_strlen(path)))
-// 		return (1);
-// 	return (0);
-// }
+static char	is_a_path(char *path)
+{
+	if (ft_strnstr(path, "/", ft_strlen(path)))
+		return (1);
+	return (0);
+}
 
 /**
  * @brief Joins a directory's path with a command.
@@ -64,6 +86,7 @@ static char	*full_path(char *dir, char *cmd)
 	path[size] = '\0';
 	return (path);
 }
+
 /**
  * @brief Finds the path of a given command, if it exists.
  * @param cmd The command for which to look for a path.
@@ -72,32 +95,31 @@ static char	*full_path(char *dir, char *cmd)
  * @returns The path of a given command if it exists, if not,
  * error_handler is called.
  */
-char	*find_path(char *cmd, char **envp, int i, t_process *data)
+char	*find_path(char *cmd, char **envp, int i, t_process *dt)
 {
 	t_paths	utils;
-	// char	*s;
+	char	*s;
 
 	utils.cmds = ft_split(cmd, ' ');
 	if (!utils.cmds)
-		print_exit(ER_MALLOC);
-	// if (is_a_path(*utils.cmds) || !access(*utils.cmds, F_OK | X_OK))
-	// 	return (s = ft_strdup(*utils.cmds), free_arrs((void **)utils.cmds), s);
+		return (dt->use_p = 0, error_handler(MKO, dt, 0), NULL);
+	if (is_a_path(*utils.cmds) || !access(*utils.cmds, F_OK | X_OK))
+		return (s = ft_strdup(*utils.cmds), free_arrs((void **)utils.cmds),
+			f_env(envp, dt), s);
 	while (*envp && ft_strncmp(*envp, "PATH=", 5))
 		envp++;
-	// if (envp == NULL)
-	// 	error_handler("PATH not found", data, 0, 1, utils.cmds);
 	utils.all_paths = ft_split(*envp, ':');
 	if (!utils.all_paths)
-		error_handler(ER_MALLOC, data, 0, 1, utils.cmds);
-	// error_handler("", NULL, 1, utils.cmds);
+		return (dt->use_p = 0, error_handler(MKO, dt, 1, utils.cmds), NULL);
 	utils.path = NULL;
 	while (utils.all_paths[i] && is_in_dir(utils.path) != 1)
 	{
 		utils.path = full_path(utils.all_paths[i], utils.cmds[0]);
 		if (!utils.path)
-			error_handler(ER_MALLOC, data, 0, 2, utils.all_paths, utils.cmds);
-		// error_handler("malloc", NULL, 2, utils.all_paths, utils.cmds);
+			return (dt->use_p = 0, error_handler(MKO, dt, 2, utils.all_paths,
+					utils.cmds), NULL);
 		i++;
 	}
-	return (free_multiple_arrs(2, utils.all_paths, utils.cmds), utils.path);
+	return (free_multiple_arrs(2, utils.all_paths, utils.cmds), f_env(envp,
+			dt), utils.path);
 }

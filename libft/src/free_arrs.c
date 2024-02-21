@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:19:01 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/21 08:36:20 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:17:08 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ void	free_arrs(void **arrs)
 		free(arrs[i]);
 		i++;
 	}
-	free(arrs[i]);
 	free(arrs);
 }

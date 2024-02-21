@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 16:14:01 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/02/19 16:08:19 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:24:35 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ char	*ft_fuse(char *s1, char *s2);
 char	*file_to_keep(int fd, char *keep, int *bytes_read);
 char	*keep_to_line(char *keep);
 char	*remove_from_keep(char *line, char *keep);
-char	*get_next_line(int fd, char binary);
+char	*get_next_line(int fd);
 #endif
